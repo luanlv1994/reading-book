@@ -1,20 +1,22 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>imgViewer Plugin - control options </title>
+    <title>Comics World</title>
     <link rel="stylesheet" href="assets/css/main.css"/>
+    <!--<link rel="stylesheet" href="assets/css/demo.css"/>-->
+    <!--<link rel="stylesheet" href="assets/css/normalize.css"/>-->
+    <link rel="stylesheet" href="assets/css/component.css"/>
+    <link rel="stylesheet" href="assets/css/imageviewer.css"/>
     <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
-    <script type="text/javascript" src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
-    <script type="text/javascript" src="https://unpkg.com/jquery-mousewheel@3.1.13"></script>
-    <script type="text/javascript" src="assets/js/hammer.min.js"></script>
-    <script type="text/javascript" src="https://unpkg.com/jquery-hammerjs@2.0.0"></script>
-    <script type="text/javascript" src="assets/js/imgViewer.js"></script>
+    <script type="text/javascript" src="assets/js/imageviewer.js"></script>
+
     <script src="assets/js/jquery.dropotron.min.js"></script>
     <script src="assets/js/jquery.scrolly.min.js"></script>
     <script src="assets/js/jquery.onvisible.min.js"></script>
     <script src="assets/js/skel.min.js"></script>
     <script src="assets/js/util.js"></script>
-    <!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
+    <!--[if lte IE 8]>
+    <script src="assets/js/ie/respond.min.js"></script><![endif]-->
     <script src="assets/js/main.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes"/>
 </head>
@@ -23,20 +25,26 @@
     <div class="header">
 
         <!-- Inner -->
-        <div class="inner">
-            <table cellspacing="0" cellpadding="0" border="0" style="width: 100%; min-width: 320px;">
-                <tr>
-                    <td style="padding: 10px">
+        <div id="wrap-image">
+        <div id="image-gallery-2">
+                <div class="image-container"></div>
+            <img src="assets/css/images/left.svg" class="prev"/>
+            <img src="assets/css/images/right.svg"  class="next"/>
+            <nav class="nav-circlepop">
+                <a class="prev" href="">
+                    <span class="icon-wrap"></span>
+                </a>
+                <a class="next" href="">
+                    <span class="icon-wrap"></span>
+                </a>
+            </nav>
 
-                        <div align="center">
-                            <img id="image1" src="images/test_image.jpg" width="65%"/>
-                            <br/>
-                        </div>
-                    </td>
-                </tr>
-            </table>
+                <div class="footer-info">
+                    <span class="current"></span>/<span class="total"></span>
+                </div>
+
         </div>
-
+        </div>
         <!-- Nav -->
         <nav id="nav">
             <ul>
@@ -69,27 +77,45 @@
 </div>
 
 <script type="text/javascript">
-    ;
-    (function ($) {
-        $(window).on("load", function () {
-            $(document).ready(function () {
+    $(function () {
+        var images = [{
+            small : 'images/test_image.jpg',
+            big : 'images/test_image.jpg'
+        },{
+            small : 'images/img_fjords.jpg',
+            big : 'images/img_fjords.jpg'
+        }];
 
+        var curImageIdx = 1,
+                total = images.length;
+        var wrapper = $('#image-gallery-2'),
+                curSpan = wrapper.find('.current');
+        var viewer = ImageViewer(wrapper.find('.image-container'));
 
-                var $img = $("#image1").imgViewer({
-                    zoomMax: 6,
-                    zoomable: true,
-                    dragable: true,
-                    onReady: function () {
-                        this.options.zoom = 3;
-                        this.panTo(1, 1);
-                    },
-                    onUpdate: function () {
-                    }
-                });
-            });
+        //display total count
+        wrapper.find('.total').html(total);
+
+        function showImage(){
+            var imgObj = images[curImageIdx - 1];
+            viewer.load(imgObj.small, imgObj.big);
+            curSpan.html(curImageIdx);
+        }
+
+        wrapper.find('.next').click(function(){
+            curImageIdx++;
+            if(curImageIdx > total) curImageIdx = 1;
+            showImage();
         });
 
-    })(jQuery);
+        wrapper.find('.prev').click(function(){
+            curImageIdx--;
+            if(curImageIdx < 0) curImageIdx = total;
+            showImage();
+        });
+
+        //initially show image
+        showImage();
+    });
 </script>
 </body>
 </html>
