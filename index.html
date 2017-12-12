@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>imgViewer Plugin - control options </title>
+    <link rel="stylesheet" href="assets/css/main.css"/>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script type="text/javascript" src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="https://unpkg.com/jquery-mousewheel@3.1.13"></script>
+    <script type="text/javascript" src="assets/js/hammer.min.js"></script>
+    <script type="text/javascript" src="https://unpkg.com/jquery-hammerjs@2.0.0"></script>
+    <script type="text/javascript" src="assets/js/imgViewer.js"></script>
+    <script src="assets/js/jquery.dropotron.min.js"></script>
+    <script src="assets/js/jquery.scrolly.min.js"></script>
+    <script src="assets/js/jquery.onvisible.min.js"></script>
+    <script src="assets/js/skel.min.js"></script>
+    <script src="assets/js/util.js"></script>
+    <!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
+    <script src="assets/js/main.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes"/>
+</head>
+<body class="homepage">
+<div id="page-wrapper">
+    <div class="header">
+
+        <!-- Inner -->
+        <div class="inner">
+            <table cellspacing="0" cellpadding="0" border="0" style="width: 100%; min-width: 320px;">
+                <tr>
+                    <td style="padding: 10px">
+
+                        <div align="center">
+                            <img id="image1" src="images/test_image.jpg" width="65%"/>
+                            <br/>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <!-- Nav -->
+        <nav id="nav">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li>
+                    <a href="#">Dropdown</a>
+                    <ul>
+                        <li><a href="#">Lorem ipsum dolor</a></li>
+                        <li><a href="#">Magna phasellus</a></li>
+                        <li><a href="#">Etiam dolore nisl</a></li>
+                        <li>
+                            <a href="#">And a submenu &hellip;</a>
+                            <ul>
+                                <li><a href="#">Lorem ipsum dolor</a></li>
+                                <li><a href="#">Phasellus consequat</a></li>
+                                <li><a href="#">Magna phasellus</a></li>
+                                <li><a href="#">Etiam dolore nisl</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="#">Veroeros feugiat</a></li>
+                    </ul>
+                </li>
+                <li><a href="">Left Sidebar</a></li>
+                <li><a href="">Right Sidebar</a></li>
+                <li><a href="">No Sidebar</a></li>
+            </ul>
+        </nav>
+
+    </div>
+</div>
+
+<script type="text/javascript">
+    ;
+    (function ($) {
+        $(window).on("load", function () {
+            $(document).ready(function () {
+
+
+                var $img = $("#image1").imgViewer({
+                    zoomMax: 6,
+                    zoomable: true,
+                    dragable: true,
+                    onReady: function () {
+                        this.options.zoom = 3;
+                        this.panTo(1, 1);
+                    },
+                    onUpdate: function () {
+                    }
+                });
+            });
+        });
+
+    })(jQuery);
+</script>
+</body>
+</html>
