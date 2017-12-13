@@ -25,10 +25,10 @@
 	display: block;
 	margin: 10% 0 0 10%;
 	width: 80%;
-	height: 80%;
+	height: 150%;
 }
 
-.nav-circlepop a.next .icon-wrap {
+.nav-circlepop span.next .icon-wrap {
 	-webkit-transform: rotate(180deg);
 	transform: rotate(180deg);
 }
@@ -37,7 +37,7 @@
 .nav-circlepop .icon-wrap::after {
 	position: absolute;
 	left: 25%;
-	width: 3px;
+	width: 7px;
 	height: 50%;
 	background: #fff;
 	content: '';

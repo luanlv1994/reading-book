@@ -25,25 +25,26 @@
     <div class="header">
 
         <!-- Inner -->
-        <div id="wrap-image">
+
         <div id="image-gallery-2">
+            <div id="wrap-image">
                 <div class="image-container"></div>
-            <img src="assets/css/images/left.svg" class="prev"/>
-            <img src="assets/css/images/right.svg"  class="next"/>
-            <nav class="nav-circlepop">
-                <a class="prev" href="">
+                <!--<img src="assets/css/images/left.svg" class="prev"/>-->
+                <!--<img src="assets/css/images/right.svg"  class="next"/>-->
+                <nav class="nav-circlepop">
+                <span class="prev" href="">
                     <span class="icon-wrap"></span>
-                </a>
-                <a class="next" href="">
+                </span>
+                <span class="next" href="">
                     <span class="icon-wrap"></span>
-                </a>
-            </nav>
+                </span>
+                </nav>
 
                 <div class="footer-info">
                     <span class="current"></span>/<span class="total"></span>
                 </div>
 
-        </div>
+            </div>
         </div>
         <!-- Nav -->
         <nav id="nav">
@@ -79,37 +80,38 @@
 <script type="text/javascript">
     $(function () {
         var images = [{
-            small : 'images/test_image.jpg',
-            big : 'images/test_image.jpg'
-        },{
-            small : 'images/img_fjords.jpg',
-            big : 'images/img_fjords.jpg'
+            small: 'images/test_image.jpg',
+            big: 'images/test_image.jpg'
+        }, {
+            small: 'images/img_fjords.jpg',
+            big: 'images/img_fjords.jpg'
         }];
 
         var curImageIdx = 1,
                 total = images.length;
         var wrapper = $('#image-gallery-2'),
                 curSpan = wrapper.find('.current');
+        var navCirclepop = wrapper.find('.nav-circlepop');
         var viewer = ImageViewer(wrapper.find('.image-container'));
 
         //display total count
         wrapper.find('.total').html(total);
 
-        function showImage(){
+        function showImage() {
             var imgObj = images[curImageIdx - 1];
             viewer.load(imgObj.small, imgObj.big);
             curSpan.html(curImageIdx);
         }
 
-        wrapper.find('.next').click(function(){
+        wrapper.find('.next').click(function () {
             curImageIdx++;
-            if(curImageIdx > total) curImageIdx = 1;
+            if (curImageIdx > total) curImageIdx = 1;
             showImage();
         });
 
-        wrapper.find('.prev').click(function(){
+        wrapper.find('.prev').click(function () {
             curImageIdx--;
-            if(curImageIdx < 0) curImageIdx = total;
+            if (curImageIdx < 0) curImageIdx = total;
             showImage();
         });
 
