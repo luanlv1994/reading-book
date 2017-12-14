@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="assets/css/imageviewer.css"/>
     <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
     <script type="text/javascript" src="assets/js/imageviewer.js"></script>
+    <script type="text/javascript" src="assets/js/angular.min.js"></script>
 
     <script src="assets/js/jquery.dropotron.min.js"></script>
     <script src="assets/js/jquery.scrolly.min.js"></script>
@@ -18,10 +19,15 @@
     <!--[if lte IE 8]>
     <script src="assets/js/ie/respond.min.js"></script><![endif]-->
     <script src="assets/js/main.js"></script>
+    <script src="assets/js/angular-resource.js"></script>
+    <script src="controller/app.js"></script>
+    <script src="factory/factory.js"></script>
+    <script src="controller/home-controller.js"></script>
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes"/>
 </head>
-<body class="homepage">
-<div id="page-wrapper">
+<body class="homepage" ng-app="myApp">
+<div id="page-wrapper" ng-controller="HomeCtrl">
     <div class="header">
 
         <!-- Inner -->
@@ -32,16 +38,16 @@
                 <!--<img src="assets/css/images/left.svg" class="prev"/>-->
                 <!--<img src="assets/css/images/right.svg"  class="next"/>-->
                 <nav class="nav-circlepop">
-                <span class="prev" href="">
+                <span class="prev" ng-click="previousImage()">
                     <span class="icon-wrap"></span>
                 </span>
-                <span class="next" href="">
+                <span class="next" ng-click="nextImage()">
                     <span class="icon-wrap"></span>
                 </span>
                 </nav>
 
                 <div class="footer-info">
-                    <span class="current"></span>/<span class="total"></span>
+                    <span class="current">{{currentIndex}}</span>/<span class="total">{{total}}</span>
                 </div>
 
             </div>
@@ -76,48 +82,5 @@
 
     </div>
 </div>
-
-<script type="text/javascript">
-    $(function () {
-        var images = [{
-            small: 'images/test_image.jpg',
-            big: 'images/test_image.jpg'
-        }, {
-            small: 'images/img_fjords.jpg',
-            big: 'images/img_fjords.jpg'
-        }];
-
-        var curImageIdx = 1,
-                total = images.length;
-        var wrapper = $('#image-gallery-2'),
-                curSpan = wrapper.find('.current');
-        var navCirclepop = wrapper.find('.nav-circlepop');
-        var viewer = ImageViewer(wrapper.find('.image-container'));
-
-        //display total count
-        wrapper.find('.total').html(total);
-
-        function showImage() {
-            var imgObj = images[curImageIdx - 1];
-            viewer.load(imgObj.small, imgObj.big);
-            curSpan.html(curImageIdx);
-        }
-
-        wrapper.find('.next').click(function () {
-            curImageIdx++;
-            if (curImageIdx > total) curImageIdx = 1;
-            showImage();
-        });
-
-        wrapper.find('.prev').click(function () {
-            curImageIdx--;
-            if (curImageIdx < 0) curImageIdx = total;
-            showImage();
-        });
-
-        //initially show image
-        showImage();
-    });
-</script>
 </body>
 </html>
